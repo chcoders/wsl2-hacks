@@ -78,7 +78,30 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     exec /usr/bin/nsenter -t "${SYSTEMD_PID}" -m -p --wd="${PWD}" /sbin/runuser -s "${USHELL}" "${UNAME}" -- "${@}"
     ```
 
-3. Set the fake-`bash` as our `root` user's shell
+4. Test the Script
+    
+    In a PowerShell terminal run:
+    
+    ```
+    > wsl --shutdown
+    ```
+
+    Fire up WSL via the MS Terminal or just `wsl.exe`.
+    Start ubunutu and test the script you created by running 
+    ```sh
+    $  bash /usr/bin/bash-bootstrap-services
+    ```
+    
+    If You are logged in as your normal user then the script is working good and `systemd` should be running
+    
+    You can test by running the following in WSL2:
+    
+    ```sh
+    $ systemctl is-active dbus
+    active
+    ```
+    
+5. Set the fake-`bash` as our `root` user's shell
 
     We need `root` level permission to get `systemd` setup and enter the environment. The way I went about solving this is to
     have WSL2 default to the `root` user and when `wsl.exe` is executed the fake-`bash` will do the right thing.
@@ -100,17 +123,7 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
 
     ```
     
-5. Re-open WSL2
 
-    Everything should be in place. Fire up WSL via the MS Terminal or just `wsl.exe`.
-    You should be logged in as your normal user and `systemd` should be running
-    
-    You can test by running the following in WSL2:
-    
-    ```sh
-    $ systemctl is-active dbus
-    active
-    ```
 
 6. Create `/etc/rc.local` (optional)
 
