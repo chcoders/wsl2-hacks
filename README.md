@@ -67,7 +67,7 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     fi
 
     # start systemd if not started
-    /usr/sbin/daemonize -l "${HOME}/.systemd.lock" /usr/bin/unshare -fp --mount-proc /lib/systemd/systemd --system-unit=basic.target 2>/dev/null
+    /usr/bin/daemonize -l "${HOME}/.systemd.lock" /usr/bin/unshare -fp --mount-proc /lib/systemd/systemd --system-unit=basic.target 2>/dev/null
     # wait for systemd to start
     while [[ "${SYSTEMD_PID}" = "" ]]; do
         sleep 0.05
