@@ -175,18 +175,21 @@ Change to something like:
 "commandline": "wsl.exe ~ -d Ubuntu-18.04",
 ```
 
-**Copy current IP of WSL2 into Windows clipboard** (optionally with port 3000 here):
+**Get current IP of WSL2 into Windows clipboard** :
 
+Create a file called getip with the following command 
+    ```sh
+    $  sudo touch /usr/local/bin/getip
+    $  sudo cjmod +x /usr/local/bin/getip 
+    ```
+ Put the following code inside the getip file using your editor   
 ```
-hostname -I | awk '{print $1}' | awk '{printf "%s:3000", $0}' | clip.exe
+hostname -I | awk '{print $1}' | awk '{printf "%s", $0}' | clip.exe
+hostname -I | awk '{print $1}' | awk '{printf "%s", $0}' 
+echo
 ```
 
-Alternatively, put it in a file, for example `copy_ip.sh`, make it executable with `chmod +x copy_ip.sh` and you can get the IP any time with `./copy_ip.sh`: 
-
-```
-#!/bin/bash
-hostname -I | awk '{print $1}' | awk '{printf "%s:3000", $0}' | clip.exe
-```
+Now everytime you type getip you will be shown the IP and it will be copied into the clipboard.
 
 **Run sudo code command for files with Previliges**
 
