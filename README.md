@@ -1,3 +1,4 @@
+# All changes here are specific to ubuntu 20.04
 # wsl2-hacks
 Useful snippets / tools for using WSL2 as a development environment
 
@@ -16,15 +17,26 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     $ sudo apt install dbus policykit-1 daemonize
     ```
 
-2. Create a fake-`bash`
+2. Exit out of / close the WSL2 shell
+
+    The next step is to shutdown WSL2 and to change the default user to `root`.
+
+    In a PowerShell terminal run:
+    
+    ```
+    > wsl --shutdown
+    > ubuntu2004.exe config --default-user root
+
+3. Create a fake-`bash`
 
     This fake shell will intercept calls to `wsl.exe bash ...` and forward them to a real bash running in the right environment for `systemd`. If this sounds like a hack-- well, it is. However, I've tested various workflows and use this daily. That being said, your mileage may vary.
 
     ```
-    $ sudo touch /usr/bin/bash
-    $ sudo chmod +x /usr/bin/bash
-    $ sudo editor /usr/bin/bash
+    $ sudo touch /usr/bin/bash-bootstrap-services
+    $ sudo chmod +x /usr/bin/bash-bootstrap-services
+    $ sudo code /usr/bin/bash-bootstrap-services
     ```
+    Code can be replaced with your editor of choice
     
     Add the following, be sure to replace `<YOURUSER>` with your WSL2 Linux username
 
@@ -86,15 +98,6 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     
     Save and close this file.
 
-4. Exit out of / close the WSL2 shell
-
-    The next step is to shutdown WSL2 and to change the default user to `root`.
-
-    In a PowerShell terminal run:
-    
-    ```
-    > wsl --shutdown
-    > ubuntu1804.exe config --default-user root
     ```
     
 5. Re-open WSL2
