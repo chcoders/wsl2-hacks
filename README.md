@@ -119,7 +119,7 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     
     *Note the `/usr/bin/bash-bootstrap-services` here, slight difference*
     
-    Save and close this file.
+    Save and close this file. Close the WSL and start again. Eveything should be working fine.
 
     ```
     
