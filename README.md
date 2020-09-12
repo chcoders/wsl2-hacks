@@ -115,9 +115,9 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     Find the line starting with `root:`, it should be the first line.
     Change it to:
     
-    `root:x:0:0:root:/root:/usr/bin/bash`
+    `root:x:0:0:root:/root:/usr/bin/bash-bootstrap-services`
     
-    *Note the `/usr/bin/bash` here, slight difference*
+    *Note the `/usr/bin/bash-bootstrap-services` here, slight difference*
     
     Save and close this file.
 
