@@ -32,9 +32,9 @@ With this setup your shells will be able to run `systemctl` commands, have auto-
     This fake shell will intercept calls to `wsl.exe bash ...` and forward them to a real bash running in the right environment for `systemd`. If this sounds like a hack-- well, it is. However, I've tested various workflows and use this daily. That being said, your mileage may vary.
 
     ```
-    $ sudo touch /usr/bin/bash-bootstrap-services
-    $ sudo chmod +x /usr/bin/bash-bootstrap-services
-    $ sudo code /usr/bin/bash-bootstrap-services
+    $ touch /usr/bin/bash-bootstrap-services
+    $ chmod +x /usr/bin/bash-bootstrap-services
+    $ code /usr/bin/bash-bootstrap-services
     ```
     Code can be replaced with your editor of choice
     
