@@ -149,25 +149,6 @@ To test you can shutdown WSL via PowerShell/CMD `wsl --shutdown` then start it b
 
 ---
 
-**Access localhost ports from Windows**
-
-**NOTE: No longer needed as of build 18945**
-
-Many development servers default to binding to `127.0.0.1` or `localhost`. It can be cumbersome and frustrating to get it to bind to `0.0.0.0` to make it accessible via Windows using the IP of the WSL2 VM.
-
-> Take a look at https://github.com/shayne/go-wsl2-host to have `wsl.local` automatically resolve to the WSL2 VM
-
-To make these dev servers / ports accessible you can run the following commands, or add them to the `/etc/rc.local` if you have `systemd` running:
-
-```shell
-# /etc/rc.local runs as root by default
-# if you run these yourself add 'sudo' to the beginning of each command
-
-$ sysctl -w net.ipv4.conf.all.route_localnet=1
-$ iptables -t nat -I PREROUTING -p tcp -j DNAT --to-destination 127.0.0.1 
-```
-
----
 
 **Increase `max_user_watches`**
 
@@ -194,7 +175,6 @@ Change to something like:
 "commandline": "wsl.exe ~ -d Ubuntu-18.04",
 ```
 
-
 **Copy current IP of WSL2 into Windows clipboard** (optionally with port 3000 here):
 
 ```
@@ -207,3 +187,26 @@ Alternatively, put it in a file, for example `copy_ip.sh`, make it executable wi
 #!/bin/bash
 hostname -I | awk '{print $1}' | awk '{printf "%s:3000", $0}' | clip.exe
 ```
+
+**Run sudo code command for files with Previliges**
+
+Currently you cannot run sudo code command. Using defualt user as root is not recommended. So best approach is to use rmate.
+
+1. Install rmate on your WSL VM
+sudo wget -O /usr/bin/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate
+sudo chmod a+x /usr/bin/rmate
+
+2. Install the Remote VS Code plugin
+make sure the Extension is enabled on WSL: after adding the plugin.
+Here is how I configured the remote VS Code plugin
+File -> Preferences -> Settings
+
+3. Start the VSCode rmate server
+Press F1 and run Search for the Remote: Start Server command.
+
+
+4. Edit your privileged files
+Start your WSL instance and open a terminal. If you've done everything correctly you should be able to now edit your files with sudo priveledges in your editor, even if you are not the root user.
+
+sudo rmate /etc/profile.d/custom-profile.sh
+
