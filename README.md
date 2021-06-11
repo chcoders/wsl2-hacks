@@ -213,3 +213,10 @@ Start your WSL instance and open a terminal. If you've done everything correctly
 
 sudo rmate /etc/profile.d/custom-profile.sh
 
+**Make it possible to run sudo code to change root files from wsl2**
+
+Currently sudo code doesnt work from wsl2. To make sudo code run you need to modify to configuration file ```/etc/sudoers```. Please open the file and modify the secure_path to enable run VS code with sudo command as below
+``` Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/mnt/c/Program Files/Vscodium/bin"```
+Just add the path to the bin folder of the VS code installation. Please note I use VScodium instead of VS Code so slight difference.
+
+
